@@ -670,6 +670,10 @@ func NewAppProjectIDSearchQuery(id string) (SearchQuery, error) {
 	return NewTextQuery(AppColumnProjectID, id, TextEquals)
 }
 
+func NewAppRedirectURIsSearchQuery(url string) (SearchQuery, error) {
+	return NewTextQuery(AppOIDCConfigColumnRedirectUris, url, TextListContains)
+}
+
 func prepareAppQuery(activeOnly bool) (sq.SelectBuilder, func(*sql.Row) (*App, error)) {
 	query := sq.Select(
 		AppColumnID.identifier(),

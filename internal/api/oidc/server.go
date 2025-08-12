@@ -56,6 +56,7 @@ func endpoints(endpointConfig *EndpointConfig) op.Endpoints {
 		EndSession:          op.NewEndpoint("/oidc/v1/end_session"),
 		JwksURI:             op.NewEndpoint("/oauth/v2/keys"),
 		DeviceAuthorization: op.NewEndpoint("/oauth/v2/device_authorization"),
+		Registration:        op.NewEndpoint("/oauth/v2/registration"),
 	}
 
 	if endpointConfig == nil {
@@ -179,6 +180,7 @@ func (s *Server) createDiscoveryConfig(ctx context.Context, supportedUILocales o
 		EndSessionEndpoint:          s.Endpoints().EndSession.Absolute(issuer),
 		JwksURI:                     s.Endpoints().JwksURI.Absolute(issuer),
 		DeviceAuthorizationEndpoint: s.Endpoints().DeviceAuthorization.Absolute(issuer),
+		RegistrationEndpoint:        s.Endpoints().Registration.Absolute(issuer),
 		ScopesSupported:             op.Scopes(s.Provider()),
 		ResponseTypesSupported:      op.ResponseTypes(s.Provider()),
 		ResponseModesSupported: []string{
